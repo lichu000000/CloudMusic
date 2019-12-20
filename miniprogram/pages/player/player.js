@@ -1,26 +1,18 @@
-// miniprogram/pages/demo/demo.js
+// pages/player/player.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      openid:''
-      
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.cloud.callFunction({
-      name:'login'
-    }).then((res)=>{
-      console.log(res);
-      this.setData({
-        openid:res.result.openid
-      })
-    })
+    console.log(options)
   },
 
   /**

@@ -34,10 +34,17 @@ Page({
           name:pl.name
         }
       })
+      this. _setMusiclist()
       wx.hideLoading()
     })
   },
 
+  //将歌曲列表存到stroage里
+  _setMusiclist(){
+    wx.setStorageSync('musiclist', this.data.musiclist)
+  },
+
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

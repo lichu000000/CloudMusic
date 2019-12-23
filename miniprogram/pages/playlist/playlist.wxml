@@ -13,3 +13,4 @@
     <x-playlist playlist="{{item}}"></x-playlist>
   </block>
 </view>
+

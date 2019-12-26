@@ -1,4 +1,6 @@
 // miniprogram/pages/blog/blog.js
+//搜索关键字
+let keyword=''
 Page({
 
   /**
@@ -7,6 +9,7 @@ Page({
   data: {
     //控制底部弹出层是否显示
     modalShow:false,
+    blogList:[]
   },
   //发布功能
   onPublish(){
@@ -43,13 +46,46 @@ Page({
       content: '',
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this._loadBlogList(0)
+  },
+  onSearch(event){
+    console.log(event.detail.keyword)
+    this.setData({
+      blogList:[]
+    })
+    keyword = event.detail.keyword
+    this._loadBlogList(0)
 
   },
-
+  _loadBlogList(start=0) {
+    wx.showLoading({
+      title: '玩命加载中',
+    })
+    wx.cloud.callFunction({
+      name:'blog',
+      data:{
+        keyword,
+        start,
+        count: 10,
+        $url:'list',
+      }
+    }).then((res)=>{
+      this.setData({
+        blogList:this.data.blogList.concat(res.result)
+      })
+      wx.hideLoading()
+    })
+  },
+  goComment(event){
+    wx.navigateTo({
+      url: '../../pages/blog-comment/blog-comment?blogId=' + event.target.dataset.blogid,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -82,14 +118,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      blogList:[]
+    })
+    this._loadBlogList(0)
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this._loadBlogList(this.data.blogList.length)
   },
 
   /**

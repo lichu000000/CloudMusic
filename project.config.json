@@ -57,6 +57,12 @@
 					"pathName": "pages/blog-edit/blog-edit",
 					"query": "nickName= \"青花瓷\"& avatarUrl=\"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJOrgiae…QGoV6godl4hog60YzxMauAogmQicAMKllKCfcBm0Ax23Q/132\"",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/profile/profile",
+					"pathName": "pages/profile/profile",
+					"scene": null
 				}
 			]
 		}
